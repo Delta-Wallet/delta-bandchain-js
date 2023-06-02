@@ -3,7 +3,7 @@
     <v-content>
       <v-container fluid>
         <v-card class="mx-auto">
-          <v-card-title>{{account?account.account:"Open MathWallet"}}</v-card-title>
+          <v-card-title>{{account?account.account:"Open detaWallet"}}</v-card-title>
           <v-card-actions>
             <v-btn class="primary" @click="login" v-if="!account">Log in</v-btn>
             <v-btn class="warning" @click="logout" v-else>Log out</v-btn>
@@ -47,15 +47,15 @@ export default {
   },
   methods: {
     login() {
-      window.mathExtension.getIdentity(this.network).then(account => {
+      window.detaExtension.getIdentity(this.network).then(account => {
         this.account = account;
-        this.provider = window.mathExtension.httpProvider(
+        this.provider = window.detaExtension.httpProvider(
           "https://api-wm-lb.bandchain.org"
         );
       });
     },
     logout() {
-      window.mathExtension.forgetIdentity().then(() => {
+      window.detaExtension.forgetIdentity().then(() => {
         this.account = null;
       });
     },
@@ -102,7 +102,7 @@ export default {
               sequence: chainAccount.sequence
             };
             // 请求插件签名
-            window.mathExtension
+            window.detaExtension
               .requestSignature(transaction)
               .then(signature => {
                 // Broadcast
